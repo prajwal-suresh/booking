@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea,[type=number] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  justify-content:center;
+  /* float:initial; */
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 15%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 55%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+</head>
+<body>
+<center><h2>Dabba Ordering</h2></center>
+<div class="container">
+  <form method="post">
+    <div class="row">
+        <div class="col-25">
+          <label for="type">Type</label>
+        </div>
+        <div class="col-75">
+          <select id="type" name="type" onchange="myType()" required>
+            <option value="small">Small</option>
+            <option value="medium">medium</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="quantity">Quantity</label>
+      </div>
+      <div class="col-75">
+        <input type="number" id="quantity" name="quantity" required>
+      </div>
+    </div>
+    
+      <div class="row">
+        <div class="col-25">
+          <label for="subscription">Subscription</label>
+        </div>
+        <div class="col-75">
+          <select name="subscription" id="subscription" onchange="mySub()" required>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="quarterly">Quarterly</option>
+          </select>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <center><input type="button" onclick="myFunction()" value="Calculate Cost"></center>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="cost">Cost</label>
+        </div>
+        <div class="col-75">
+          <p id="cost"></p>
+        </div>
+      </div>
+      <br>
+    <div class="row">
+      <center><input type="submit" value="Submit"></center>
+    </div>
+  </form>
+</div>
+<script>
+
+  function myType(){
+    let type=document.getElementById("type").value;
+    console.log(type);
+    if(type == "small"){
+       return 100;}
+    else if(type=="medium"){
+      return 130;}
+    else if(type=="large"){
+     return 150;}
+  }
+   
+  function mySub(){
+    let subscription=document.getElementById("subscription").value;
+    console.log(subscription);
+    if(subscription=="weekly"){
+      return 7;
+    }
+    else if(subscription=="monthly"){
+      return 30;
+    }
+    else if(subscription=="quarterly"){
+      return 180;
+    }
+  }
+
+  function myFunction(){
+    let quantity;
+    quantity=document.getElementById("quantity").value;
+    console.log(quantity);
+    let cost=0;
+    cost=myType()*mySub()*quantity;
+    document.getElementById("cost").innerHTML = cost;
+    console.log(cost);
+  }
+
+</script>
+</body>
+</html>
